@@ -32,7 +32,7 @@ class syntax_plugin_mp3play extends DokuWiki_Syntax_Plugin {
         return array(
             'author' => 'Michael Klier',
             'email'  => 'chi@chimeric.de',
-            'date'   => '2008-08-15',
+            'date'   => @file_get_contents(DOKU_PLUGIN.'mp3play/VERSION'),
             'name'   => 'Mp3play',
             'desc'   => 'Embeds a flash mp3 player.',
             'url'    => 'http://dokuwiki.org/plugin:mp3play',
