@@ -99,9 +99,6 @@ class syntax_plugin_mp3play extends DokuWiki_Syntax_Plugin {
         if($mode == 'xhtml') {
             $renderer->info['cache'] = false;
 
-            $players = p_get_metadata($ID, 'plugin_mp3play players');
-            $instance = $players[$data['mp3']];
-
             $params = '';
             $color_cfg = DOKU_PLUGIN . 'mp3play/colors.conf';
 
@@ -129,23 +126,15 @@ class syntax_plugin_mp3play extends DokuWiki_Syntax_Plugin {
             $params .= ($data['autostart']) ? 'autostart=yes&amp;' : 'autostart=no&amp;';
 
             $renderer->doc .= '<div class="plugin_mp3play">' . DOKU_LF;
-            $renderer->doc .= '  <object type="application/x-shockwave-flash" data="' . DOKU_URL . 'lib/plugins/mp3play/player.swf" id="audioplayer' . $instance . '" height="24" width="290">' . DOKU_LF;
+            $renderer->doc .= '  <object type="application/x-shockwave-flash" data="' . DOKU_URL . 'lib/plugins/mp3play/player.swf" class="plugin_mp3play" height="24" width="290">' . DOKU_LF;
             $renderer->doc .= '    <param name="movie" value="' . DOKU_URL . 'lib/plugins/mp3play/player.swf" />' . DOKU_LF;
-            $renderer->doc .= '    <param name="FlashVars" value="playerID=' . $instance . '&amp;' . $params . 'soundFile=' . DOKU_URL . '/lib/exe/fetch.php?media=' . $data['mp3'] . '" />' . DOKU_LF;
+            $renderer->doc .= '    <param name="FlashVars" value="' . $params . 'soundFile=' . DOKU_URL . '/lib/exe/fetch.php?media=' . $data['mp3'] . '" />' . DOKU_LF;
             $renderer->doc .= '    <param name="quality" value="high" />' . DOKU_LF;
             $renderer->doc .= '    <param name="menu" value="false" />' . DOKU_LF;
             $renderer->doc .= '    <param name="wmode" value="transparent" />' . DOKU_LF;
             $renderer->doc .= '  </object>' . DOKU_LF;
             $renderer->doc .= '</div>' . DOKU_LF;
 
-        } elseif ($mode == 'metadata') {
-
-            if($renderer->meta['plugin_mp3play']['instances']) {
-                $renderer->meta['plugin_mp3play']['instances']++;
-            } else {
-                $renderer->meta['plugin_mp3play']['instances'] = 1;
-            }
-            $renderer->meta['plugin_mp3play']['players'][$data['mp3']] = $renderer->meta['plugin_mp3play']['instances'];
         }
     }
 }

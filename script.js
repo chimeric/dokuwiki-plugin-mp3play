@@ -11,10 +11,10 @@ var ap_instances = new Array();
 function ap_stopAll(playerID) {
     for(var i = 0; i<ap_instances.length; i++) {
         try {
-            if(ap_instances[i] != playerID) { 
-                $("audioplayer" + ap_instances[i].toString()).SetVariable("closePlayer", 1);
+            if(ap_instances[i].id != 'audioplayer' + playerID) { 
+                ap_instances[i].SetVariable("closePlayer", 1);
             } else {
-                $("audioplayer" + ap_instances[i].toString()).SetVariable("closePlayer", 0);
+                ap_instances[i].SetVariable("closePlayer", 0);
             }
         } catch( errorObject ) {
             // stop any errors
@@ -23,13 +23,22 @@ function ap_stopAll(playerID) {
 }
 
 addInitEvent(function() {
-    var objectID;
     var objectTags = document.getElementsByTagName("object");
+    var players = new Array();
+
+    var x = 0;
     for(var i=0; i<objectTags.length; i++) {
-        objectID = objectTags[i].id;
-        if(objectID.indexOf("audioplayer") == 0) {
-            ap_instances[i] = objectID.substring(11, objectID.length);
+        if(objectTags[i].className == 'plugin_mp3play') {
+            players[x] = objectTags[i];
+            x++;
         }
+    }
+
+    for(var j=0; j<players.length; j++) {
+        players[j].id = 'audioplayer' + j;
+        ap_instances[j] = players[j];
+        var flashvars = players[j].getElementsByTagName('param')[1];
+        flashvars.value = flashvars.value + '&playerID=' + j;
     }
 });
 
