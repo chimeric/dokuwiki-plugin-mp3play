@@ -26,20 +26,6 @@ if(!defined('DOKU_LF')) define('DOKU_LF',"\n");
 class syntax_plugin_mp3play extends DokuWiki_Syntax_Plugin {
  
     /**
-     * return some info
-     */
-    function getInfo(){
-        return array(
-            'author' => 'Michael Klier',
-            'email'  => 'chi@chimeric.de',
-            'date'   => @file_get_contents(DOKU_PLUGIN.'mp3play/VERSION'),
-            'name'   => 'Mp3play',
-            'desc'   => 'Embeds a flash mp3 player.',
-            'url'    => 'http://dokuwiki.org/plugin:mp3play',
-        );
-    }
- 
-    /**
      * Syntax Type
      *
      * Needs to return one of the mode types defined in $PARSER_MODES in parser.php

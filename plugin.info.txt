@@ -1,0 +1,7 @@
+base   mp3play
+author Michael Klier
+email  chi@chimeric.de
+date   2010-05-31
+name   mp3play plugin
+desc   Embeds a flash mp3player.
+url    http://dokuwiki.org/plugin:mp3play
